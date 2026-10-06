@@ -77,8 +77,7 @@ Result:
 
 ## What I observed
 
-<!-- Write in your own words: -->
-<!-- - Which history is easier to read, and why? -->
+-<!-- - Which history is easier to read, and why? -->
 <!-- - Why did the hash change after rebase? -->
 <!-- - Why did the final merge after rebase not create a merge commit? (fast-forward) -->
 
