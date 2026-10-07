@@ -42,8 +42,15 @@ git log --graph --oneline
 Result:
 
 ```text
-<paste output of: git log --graph --oneline>
+*   a0273eb (HEAD -> main) Merge feature/merge-demo
+|\
+| * 46d70fd (feature/merge-demo) feat: add feature1
+* | 635246c chore: add main1
+|/
+* 61cf702 chore: initial commit
 ```
+
+The merge created a new commit (`a0273eb`) with two parents. The original commits kept their hashes.
 
 ## Experiment 2: rebase
 
@@ -66,20 +73,27 @@ git merge feature/rebase-demo
 git log --graph --oneline
 ```
 
-Hash before rebase: `<paste>`
-Hash after rebase: `<paste>`
+Hash before rebase: `f0133b2`
+Hash after rebase: `f76149e`
 
 Result:
 
 ```text
-<paste output of: git log --graph --oneline>
+* f76149e (HEAD -> main, feature/rebase-demo) feat: add feature2
+* 1d7652e chore: add main2
+*   a0273eb Merge feature/merge-demo
+|\
+| * 46d70fd (feature/merge-demo) feat: add feature1
+* | 635246c chore: add main1
+|/
+* 61cf702 chore: initial commit
 ```
 
 ## What I observed
 
--<!-- - Which history is easier to read, and why? -->
-<!-- - Why did the hash change after rebase? -->
-<!-- - Why did the final merge after rebase not create a merge commit? (fast-forward) -->
+- The rebased history is one straight line, so it is easier to read. The merge history shows two paths, but it also shows that the work happened in parallel.
+- Rebase replayed my commit on top of the new main commit. Its parent changed, so its hash changed from `f0133b2` to `f76149e`.
+- After the rebase, my feature branch was directly ahead of main, so Git only had to move the main pointer forward. That is a fast-forward, so no merge commit was created.
 
 ## When I use each
 
@@ -89,4 +103,7 @@ Result:
 
 ## Gotchas
 
-<!-- Add anything real you hit, e.g. a rebase conflict and how you continued with `git rebase --continue`. -->
+- `git commit` without `-m` treats the text as a file name and fails with a pathspec error.
+- A scratch repo made with `git init` has no remote, so `git push` fails with "No configured push destination".
+- `git log` opens a pager; press `q` to leave it.
+- In zsh, an exclamation mark inside double quotes triggers history expansion and breaks the command. Use single quotes instead.
