@@ -1,1 +1,11 @@
-two
+## Learning Git
+Practicing selective staging.
+
+
+
+
+
+
+
+## Next Steps
+Learn branching and pull requests.
